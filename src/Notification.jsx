@@ -6,7 +6,7 @@ class Notification extends Component {
     };
 
 
-
+//pure functional component
   render() {
         return (
           <div className = "message system">{this.props.content}</div>

@@ -4,6 +4,7 @@ import MessageList from './MessageList.jsx';
 import UserCounter from './UserCounter.jsx';
 
 
+
 class App extends Component {
 
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
 
     this.socket = null;
     this.state = {
-      currentUser: {name: "Bob"},
+      currentUser: {name: 'Bob'},
       messages: [],
       colour: null,
       usersOnline: 0
@@ -19,60 +20,46 @@ class App extends Component {
     this.onNewMessage=this.onNewMessage.bind(this);
     this.componentDidMount=this.componentDidMount.bind(this);
     this.onUserChange=this.onUserChange.bind(this);
-
   }
 
   componentDidMount() {
-    this.socket = new WebSocket("ws://localhost:3001");
-    console.log("connected to server?...  i hope");
+    this.socket = new WebSocket('ws://localhost:3001');
 
     //Assigning colour to the client and storing it in a state
-    const number = Math.floor(Math.random() * 4) + 1;
-    let colour = null;
-    console.log(number);
-    if(number == 1){
-      colour = 'redUser';
-      this.setState({colour});
-    } else if (number == 2){
-      colour = 'blueUser';
-      this.setState({colour});
-    } else if (number == 3){
-      colour = 'greenUser';
-      this.setState({colour});
-    } else {
-      colour = 'brownUser'
-      this.setState({colour});
-    }
-
+    const colourStyles = [
+      'redUser',
+      'blueUser',
+      'greenUser',
+      'brownUser',
+    ];
+    const colorIndex = Math.floor(Math.random() * colourStyles.length);
+    this.setState({colour: colourStyles[colorIndex]});
 
     this.socket.addEventListener('message', (event) => {
-      console.log("Client got the message!");
       const newMessage = JSON.parse(event.data);
 
       //Checking what kind of message should be sent to the clients
       if (newMessage.type === 'incomingMessage' || newMessage.type === 'incomingNotification') {
-        const messages = this.state.messages;
+        const messages = this.state.messages;   // TODO: consider slicing, and/or deep cloning
         messages.push(newMessage);
         this.setState({messages});
       } else if (newMessage.type === 'userCountUpdate'){
         const usersOnline = newMessage.count;
         this.setState({usersOnline});
       } else {
-        console.log("ERROR!");
+        console.log('ERROR!', event.data);
       }
     });
   }
 
   //Sending a new message to the websocket server for a new chat message
   onNewMessage(message){
-    console.log("Message is: ", message);
     const newMessage = {
       username: this.state.currentUser.name,
       content: message,
       type: 'postMessage',
       colour: this.state.colour
     };
-
     this.socket.send(JSON.stringify(newMessage));
   }
 
@@ -89,7 +76,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('in app ',this.state.currentUser);
     return(
       <div>
         <UserCounter usersOnline = {this.state.usersOnline} />
@@ -99,4 +85,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;

@@ -4,7 +4,6 @@ const express = require('express');
 const SocketServer = require('ws').Server;
 const uuid = require('uuid/v4');
 let numberUsers = 0;
-const clients = [];
 
 
 
@@ -20,28 +19,25 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
-
-
-
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
-  console.log('Client connected');
-  clients.push(ws);
+  console.log('Client connected, now have', wss.clients.size);
+  //Tracking how many users have connected to the system
 
-  //Sending a message to update user count
-  clients.forEach((client) => {
-      if (client.readyState == ws.OPEN) {
-        client.send(JSON.stringify({type: "userCountUpdate", count: wss.clients.size}));
+  function sendMessageToOpenClients(messageObj){
+    wss.clients.forEach((client) => {
+      if (client.readyState === ws.OPEN) {
+        client.send(JSON.stringify(messageObj));
       }
-  });
-
+    });
+  }
+  //Updating how many users are online
+  sendMessageToOpenClients({type: "userCountUpdate", count: wss.clients.size});
 
   ws.on('message', function incoming(data) {
-
     const message = JSON.parse(data);
-
     //Adding ID number
     message['id'] = uuid();
     if (message['type'] === 'postMessage'){
@@ -51,25 +47,14 @@ wss.on('connection', (ws) => {
     } else {
       message['type'] = 'ERROR!';
     }
-
-    //Sending message back
-    clients.forEach((client) => {
-      if (client.readyState == ws.OPEN) {
-        client.send(JSON.stringify(message));
-      }
-    });
+    //Sending message back to the other clients
+    sendMessageToOpenClients(message);
   });
-
-
 
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', function(){
-    console.log('Client disconnected');
-    //Sending message to update the user count
-    clients.forEach((client) => {
-      if (client.readyState == ws.OPEN) {
-        client.send(JSON.stringify({type: "userCountUpdate", count: wss.clients.size}));
-      }
-    });
+    console.log('Client disconnected, now have', wss.clients.size);
+    //Sending message to update the user count when user disconnects
+    sendMessageToOpenClients({type: "userCountUpdate", count: wss.clients.size});
   });
 });

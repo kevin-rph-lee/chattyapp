@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 
 class UserCounter extends Component {
-    constructor(props) {
-      super(props);
-    };
-
   render() {
-        return (
-          <div className="user-counter">{this.props.usersOnline} users online</div>
+    return (
+      <div className="user-counter">{this.props.usersOnline} users online</div>
     );
   }
 }
+
 export default UserCounter;
