@@ -13,7 +13,8 @@ class MessageList extends Component {
         case 'incomingMessage': return <Message
                                         key = { message.id }
                                         username = { message.username }
-                                        content = { message.content } />;
+                                        content = { message.content }
+                                        colour = { message.colour } />;
         case 'incomingNotification': return <Notification
                                              key = { message.id }
                                              content = { message.content } />;

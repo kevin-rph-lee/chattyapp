@@ -32,16 +32,16 @@ class App extends Component {
     let colour = null;
     console.log(number);
     if(number == 1){
-      colour = '#FF0000';
+      colour = 'redUser';
       this.setState({colour});
     } else if (number == 2){
-      colour = '#4169E1';
+      colour = 'blueUser';
       this.setState({colour});
     } else if (number == 3){
-      colour = '#2E8B57';
+      colour = 'greenUser';
       this.setState({colour});
     } else {
-      colour = '#8A2BE2'
+      colour = 'brownUser'
       this.setState({colour});
     }
 
