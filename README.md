@@ -1,45 +1,31 @@
-React Boilerplate
-=====================
+# Chatty
 
-A minimal and light dev environment for ReactJS.
+A fullstack application built with node and jquery. It allows users to add tweets to a page. When a tweet is added, the page tracks how long ago it was created and it uses a generic random username/handle as user management has not been implemented yet.
 
-### Usage
+## Final Product
 
-Clone the boilerplate and create your own git repo.
+![SS1](https://raw.githubusercontent.com/kevin-rph-lee/tweeter/master/tweeter.PNG?raw=true "Screenshot")
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
 
-Install the dependencies and start the server.
-
-```
-npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
-### Dependencies
-
+## Dependencies
 * React
 * Webpack
 * [babel-loader](https://github.com/babel/babel-loader)
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+
+
+## Getting Started
+Install the dependencies and start the server.
+
+
+1. npm install
+2. npm start
+3. go into chatty_server folder and run node server.js
+4. open http://localhost:3000
+
+## Contact
+
+- Email: Kevin.rph.lee@gmail.com
+- Bnet: Axel#1556
+
+

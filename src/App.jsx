@@ -26,8 +26,7 @@ class App extends Component {
     this.socket = new WebSocket("ws://localhost:3001");
     console.log("connected to server?...  i hope");
 
-    //Assigning colour
-
+    //Assigning colour to the client and storing it in a state
     const number = Math.floor(Math.random() * 4) + 1;
     let colour = null;
     console.log(number);

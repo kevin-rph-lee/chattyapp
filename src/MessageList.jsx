@@ -9,6 +9,7 @@ class MessageList extends Component {
 
   render() {
     const messages = this.props.messages.map((message) => {
+      //Checking to see what kind of message it is, a regular one or notificiation
       switch(message.type){
         case 'incomingMessage': return <Message
                                         key = { message.id }
