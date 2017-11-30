@@ -1,6 +1,6 @@
 # Chatty
 
-A fullstack application built with node and jquery. It allows users to add tweets to a page. When a tweet is added, the page tracks how long ago it was created and it uses a generic random username/handle as user management has not been implemented yet.
+A fullstack application built with react and websockets. Allows multiple people to chat to each other via the application.
 
 ## Final Product
 
