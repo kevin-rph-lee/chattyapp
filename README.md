@@ -4,7 +4,7 @@ A fullstack application built with react and websockets. Allows multiple people 
 
 ## Final Product
 
-![SS1](https://raw.githubusercontent.com/kevin-rph-lee/chattyapp/master/screenshot.png"Screenshot")
+![SS1](https://raw.githubusercontent.com/kevin-rph-lee/chattyapp/master/screenshot.png)
 
 
 ## Dependencies
