@@ -12,7 +12,7 @@ class App extends Component {
 
     this.socket = null;
     this.state = {
-      currentUser: {name: 'Bob'},
+      currentUser: {name: 'Anonymous'},
       messages: [],
       colour: null,
       usersOnline: 0
